@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
 
         val rollButton: Button = findViewById(R.id.button)
         rollButton.setOnClickListener { rollDice() }
+
+        rollDice()        // Do a dice roll when the app start, in order to display a random dice image for the first time
     }
 
     private fun rollDice() {
