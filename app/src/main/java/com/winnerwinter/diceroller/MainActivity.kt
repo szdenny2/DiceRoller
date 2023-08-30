@@ -10,16 +10,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val rollButton: Button = findViewById(R.id.button)
-        rollButton.setOnClickListener { rollDice() }
-
-        rollDice()        // Do a dice roll when the app start, in order to display a random dice image for the first time
+        val diceImage: ImageView = findViewById(R.id.imageView)
+        diceImage.setOnClickListener { rollDice(diceImage) }
+        diceImage.performClick()
     }
 
-    private fun rollDice() {
+    private fun rollDice(diceImage: ImageView) {
         val dice = Dice(6)
         val diceRoll = dice.roll()
-        val diceImage: ImageView = findViewById(R.id.imageView)
         val drawableResource = when (diceRoll) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2

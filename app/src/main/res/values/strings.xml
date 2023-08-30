@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Dice Roller</string>
-    <string name="button_roll">Roll</string>
+    <string name="app_name">摇色子</string>
+    <string name="button_roll">点击色子更换点数</string>
 </resources>
