@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +20,17 @@ class MainActivity : AppCompatActivity() {
         diceImage.performClick()
     }
 
+    private var lastTime: Long = 0
     private fun rollDice(diceImage: ImageView, addTv: TextView) {
+        var currentTimeMillis = System.currentTimeMillis();
+        if (abs(lastTime - currentTimeMillis) < 1000) {
+            return
+        }
+        lastTime = currentTimeMillis
         val dice = Dice(60)
         val diceRoll = dice.roll()
         //特殊奖励
-        addTv.visibility = if (diceRoll == 60) View.VISIBLE else View.INVISIBLE
+        addTv.visibility = if (diceRoll >= 55) View.VISIBLE else View.INVISIBLE
         val drawableResource = when (diceRoll / 10) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
