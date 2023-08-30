@@ -19,9 +19,16 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:importantForAccessibility="no"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/dice_1" />
+
+    <TextView
+        android:id="@+id/addTv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="奖励叠加"
+        android:paddingBottom="250dp"
+        android:textColor="@color/colorBlue"
+        android:textSize="50sp" />
 
 </FrameLayout>

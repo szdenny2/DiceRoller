@@ -2,8 +2,10 @@ package com.winnerwinter.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,14 +13,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val diceImage: ImageView = findViewById(R.id.imageView)
-        diceImage.setOnClickListener { rollDice(diceImage) }
+        val addTv: TextView = findViewById(R.id.addTv)
+        addTv.visibility = View.INVISIBLE
+        diceImage.setOnClickListener { rollDice(diceImage, addTv) }
         diceImage.performClick()
     }
 
-    private fun rollDice(diceImage: ImageView) {
-        val dice = Dice(6)
+    private fun rollDice(diceImage: ImageView, addTv: TextView) {
+        val dice = Dice(60)
         val diceRoll = dice.roll()
-        val drawableResource = when (diceRoll) {
+        //特殊奖励
+        addTv.visibility = if (diceRoll == 60) View.VISIBLE else View.INVISIBLE
+        val drawableResource = when (diceRoll / 10) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
             3 -> R.drawable.dice_3
