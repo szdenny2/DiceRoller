@@ -1,18 +1,27 @@
 package com.winnerwinter.diceroller
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.AssetFileDescriptor
+import android.media.AudioManager
+import android.media.MediaPlayer
+import android.media.MediaPlayer.OnCompletionListener
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import java.io.IOException
 import kotlin.math.abs
 
+
 class MainActivity : AppCompatActivity() {
+
+    var mediaPlayer: MediaPlayer = MediaPlayer() //定义了一个成员函数
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initMediaPlayer();
 
         val bgFl: View = findViewById(R.id.bgFl)
         val diceImage: ImageView = findViewById(R.id.imageView)
@@ -48,7 +57,44 @@ class MainActivity : AppCompatActivity() {
             diceImage.setImageResource(drawableResource)
         } finally {
             count++
-            bgFl.setBackgroundColor(resources.getColor(if(count%2==0) R.color.colorRed else R.color.colorAccent, null))
+            bgFl.setBackgroundColor(
+                resources.getColor(
+                    if (count % 2 == 0) R.color.colorRed else R.color.colorAccent,
+                    null
+                )
+            )
+            vibrate()
+            playerMusic()
+        }
+    }
+
+    private fun vibrate() {
+        (getSystemService(VIBRATOR_SERVICE) as Vibrator).vibrate(longArrayOf(300, 500), -1) //开始震动
+    }
+
+    private fun playerMusic() {
+        //播放铃声
+        mediaPlayer.start()
+    }
+    @Suppress("DEPRECATION")
+    private fun initMediaPlayer() {
+        volumeControlStream = AudioManager.STREAM_MUSIC //调用音乐服务
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mediaPlayer.setOnCompletionListener { mp ->
+            mp.seekTo(0)
+        }
+        var file: AssetFileDescriptor? = null
+        try {
+            file = resources.openRawResourceFd(R.raw.y1981) //准备歌的所在路径
+            mediaPlayer.setDataSource(
+                file.fileDescriptor,
+                file.startOffset, file.length
+            )
+            mediaPlayer.setVolume(5f, 5f)
+            mediaPlayer.prepare()
+        } catch (e: Exception) {
+        } finally {
+            file?.close()
         }
     }
 }
