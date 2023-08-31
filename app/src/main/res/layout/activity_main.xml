@@ -2,8 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bgFl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context=".MainActivity">
 
     <TextView
@@ -26,9 +28,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:paddingBottom="350dp"
         android:text="奖励叠加"
-        android:paddingBottom="250dp"
-        android:textColor="@color/colorBlue"
-        android:textSize="50sp" />
+        android:textColor="@color/colorBlack"
+        android:textSize="50sp"
+        android:textStyle="italic|bold" />
 
 </FrameLayout>

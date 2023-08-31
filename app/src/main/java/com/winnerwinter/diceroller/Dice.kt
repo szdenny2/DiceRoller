@@ -1,8 +1,8 @@
 package com.winnerwinter.diceroller
 
-class Dice (val numSides: Int){
+class Dice (private val numSide: Int){
 
     fun roll(): Int {
-        return (1..numSides).random()
+        return (0..numSide).random()
     }
 }
